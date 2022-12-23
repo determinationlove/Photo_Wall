@@ -1,15 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import Wall from './component/wall';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import './index.css';
+import Wall from './component/wall';
+
+
+const container = document.getElementById('root');
+const root = createRoot(container);
+
 root.render(
-  <React.StrictMode>
-    <Wall />
-  </React.StrictMode>
+  <Wall />
+  
 );
 
-reportWebVitals();
+
