@@ -49,7 +49,7 @@
     "path": false
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.js",
+  "main": "./index.js",
   "devDependencies": {
     "tailwindcss": "^3.2.4",
     "typescript": "^4.9.4"
@@ -64,5 +64,5 @@
   "bugs": {
     "url": "https://github.com/determinationlove/Photo_Wall/issues"
   },
-  "homepage": "."
+  "homepage": "https://github.com/determinationlove/Photo_Wall#readme"
 }
