@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/determinationlove/photo_wall/static/css/main.341b1e16.css",
+    "main.js": "/determinationlove/photo_wall/static/js/main.0bc60a58.js",
+    "index.html": "/determinationlove/photo_wall/index.html",
+    "main.341b1e16.css.map": "/determinationlove/photo_wall/static/css/main.341b1e16.css.map",
+    "main.0bc60a58.js.map": "/determinationlove/photo_wall/static/js/main.0bc60a58.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.341b1e16.css",
+    "static/js/main.0bc60a58.js"
+  ]
+}
