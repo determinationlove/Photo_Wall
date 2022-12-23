@@ -6,6 +6,7 @@ export type Props = {};
 
 const Photos = ({}: Props) => {
     const [Data, setData] = useState<any>();
+    const [IsLoading, setIsLoading] = useState<any>(true);
     const apiKey = process.env.REACT_APP_API_KEY;
 
     let num: number = 20;
@@ -13,19 +14,31 @@ const Photos = ({}: Props) => {
     useEffect(() => {
         axios.get("https://api.thecatapi.com/v1/images/search?limit=20", { headers: { "x-api-key": `${apiKey}` } }).then((res) => {
             setData(res.data);
-            //console.log(res.data);
+            setIsLoading(false);
         });
     }, []);
 
-    return (
-        <div className="flex flex-col items-center justify-center">
-            <div className="w-full h-full min-w-xl columns-3 gap-8 p-12 items-center justify-center">
-                {Data?.map((id: any, index: any) => {
-                    return <div className="mb-6 items-center justify-center"><img src={Data[index].url} className="shadow-md rounded-sm" alt="cat image" /></div>;
-                })}
+    if (IsLoading) {
+        return(
+            <div className="flex w-full items-center justify-center text-amber-800 text-xl">
+                <p>Loading ...</p>
             </div>
-        </div>
-    );
+        );
+    } else {
+        return (
+            <div className="flex flex-col items-center justify-center">
+                <div className="w-full h-full min-w-xl columns-3 gap-8 p-12 items-center justify-center">
+                    {Data?.map((id: any, index: any) => {
+                        return (
+                            <div className="mb-6 items-center justify-center">
+                                <img src={Data[index].url} className="shadow-md rounded-sm" alt="cat image" />
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+    }
 };
 
 export default Photos;
