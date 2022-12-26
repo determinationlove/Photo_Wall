@@ -1,23 +1,23 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import 'tailwindcss/tailwind.css';
 import Photos from "./photos";
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 export type Props = {};
 
 const Wall = ({}: Props) => {
   return (
-    <div className="flex w-full bg-zinc-200 flex-col absolute">
+    <div className="container-fluid bg-body-secondary d-flex">
         
-      <div className="flex w-full h-30 justify-center items-start my-6">
-        <div className="flex w-fit h-fit  text-slate-600 text-4xl">
+      <div className="d-flex container-fluid my-3 align-items-center justify-content-center  flex-column">
+        <div className="">
           <h1>Photo Wall</h1>
           <p></p>
         </div>
-        
+        <Photos />
       </div>
 
-      <Photos />
+      
     </div>
   );
 }
