@@ -10,7 +10,7 @@ const Wall = ({}: Props) => {
     <div className="container-fluid bg-body-secondary d-flex">
         
       <div className="d-flex container-fluid my-3 align-items-center justify-content-center  flex-column">
-        <div className="">
+        <div className=" py-4">
           <h1>Photo Wall</h1>
           <p></p>
         </div>
