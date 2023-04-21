@@ -12,16 +12,20 @@ export type Props = {
 
 const Card = ({ img, code, onFlip, isCovered, notDone }: Props) => {
     const [isFlip, setIsFlip] = useState(false);
+    const [isClickable, setIsClickable] = useState(true);
 
     const cardfront = require("../assets/logo192.png");
     const cardback = img;
 
     function image() {
-        setIsFlip(!isFlip);
+        if (isClickable) {
+            setIsFlip(!isFlip);
+        }
     }
 
     useEffect(() => {
-        if (isFlip) {
+        if (isFlip == true) {
+            setIsClickable(false);
             onFlip(code);
         }
     }, [isFlip]);
@@ -30,6 +34,7 @@ const Card = ({ img, code, onFlip, isCovered, notDone }: Props) => {
         if (isCovered) {
             setTimeout(() => {
                 setIsFlip(false);
+                setIsClickable(true);
             }, 1000);
         }
     }, [isCovered]);
@@ -42,10 +47,10 @@ const Card = ({ img, code, onFlip, isCovered, notDone }: Props) => {
 
     return (
         <div
-            className="card d-flex align-items-center justify-content-center col m-2 shadow-sm 
+            className="card align-items-center justify-content-center col m-2 shadow-sm 
                        bg-image hover-zoom"
-            style={{ maxWidth: "10rem", height: notDone ? "14rem" : "0" }}
-            onMouseDown={image}
+            style={{ maxWidth: "10rem", height: notDone ? "14rem" : "0", display: notDone ? "flex" : "block"}}
+            onMouseDown={() => notDone ? image() : ""}
         >
             <img src={isFlip ? cardback : cardfront} className="w-100" style={{ height: notDone ? "fit-content" : "0" }} />
         </div>
