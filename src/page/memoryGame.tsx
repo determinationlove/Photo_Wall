@@ -7,14 +7,18 @@ import Card from "../component/card";
 export type Props = {};
 
 const MemoryGame = ({}: Props) => {
+    let totalCard = 12;
+
     const [Data, setData] = useState<any>();
     const [cards, setCards] = useState<any[]>([]);
     const [IsLoading, setIsLoading] = useState<any>(true);
     const apiKey = process.env.REACT_APP_API_KEY;
 
     const [flippedCards, setFlippedCards] = useState<any[]>(["0"]);
-
-    let totalCard = 12;
+    const [coverAllCards, setCoverAllCards] = useState(false);
+    const [visibleCards, setVisibleCards] = useState(
+        new Array(totalCard).fill(true)
+    );
 
     useEffect(() => {
         async function fetchData() {
@@ -55,6 +59,8 @@ const MemoryGame = ({}: Props) => {
                     img={data[i].url}
                     code={data[i].id}
                     onFlip={checkOnFlip}
+                    isCovered={coverAllCards}
+                    notDone={visibleCards}
                 />
             );
             cards.push(
@@ -62,6 +68,8 @@ const MemoryGame = ({}: Props) => {
                     img={data[i].url}
                     code={data[i].id}
                     onFlip={checkOnFlip}
+                    isCovered={coverAllCards}
+                    notDone={visibleCards}
                 />
             );
 
@@ -82,14 +90,50 @@ const MemoryGame = ({}: Props) => {
         setIsLoading(false); // 載入完成
     }
 
-    // 檢查翻開的卡片是否一樣
     function checkOnFlip(cardId: string) {
-        setFlippedCards(prevFlippedCards => [...prevFlippedCards, cardId]);
+        setFlippedCards((prevFlippedCards) => [...prevFlippedCards, cardId]);
     }
 
+    // 檢查翻開的卡片是否一樣
     useEffect(() => {
-        console.log(flippedCards);
-      }, [flippedCards]);
+        if (flippedCards.length >= 3) {
+            setCoverAllCards(true);
+            console.log("flippedCards 大於 3");
+
+            let ans = flippedCards.filter(function (item, index, arr) {
+                return arr.indexOf(item) !== index;
+            });
+
+            if (ans.length != 0) {
+                const matchedCardIndexes: number[] = [];
+
+                ans.forEach((cardId) => {
+                    cards.forEach((card, index) => {
+                        if (card.props.code === cardId) {
+                            matchedCardIndexes.push(index);
+                        }
+                    });
+                });
+
+                setVisibleCards((prevVisibleCards) => {
+                    const newVisibleCards = [...prevVisibleCards];
+                    matchedCardIndexes.forEach((index) => {
+                        newVisibleCards[index] = false;
+                    });
+                    return newVisibleCards;
+                });
+            }
+
+            setFlippedCards(["0"]);
+        } else {
+            setCoverAllCards(false);
+            //setHasCardDone(false);
+        }
+    }, [flippedCards]);
+
+    useEffect(() => {
+        console.log("有牌一樣", visibleCards);
+    }, [visibleCards]);
 
     if (IsLoading) {
         return (
@@ -109,9 +153,12 @@ const MemoryGame = ({}: Props) => {
 
                 <div className="container d-flex flex-wrap align-items-center justify-content-center">
                     <div className="row row-cols-4 ">
-                        {cards.map((card) => (
+                        {cards.map((card, index) => (
                             <div className="col d-flex align-items-center justify-content-center">
-                                {card}
+                                {React.cloneElement(card, {
+                                    isCovered: coverAllCards,
+                                    notDone: visibleCards[index],
+                                })}
                             </div>
                         ))}
                     </div>
