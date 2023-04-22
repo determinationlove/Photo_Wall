@@ -47,12 +47,16 @@ const Card = ({ img, code, onFlip, isCovered, notDone }: Props) => {
 
     return (
         <div
-            className="card align-items-center justify-content-center col m-2 shadow-sm 
-                       bg-image hover-zoom"
-            style={{ maxWidth: "10rem", height: notDone ? "14rem" : "0", display: notDone ? "flex" : "block"}}
-            onMouseDown={() => notDone ? image() : ""}
+            className={`card align-items-center justify-content-center col m-2 shadow-sm
+                        bg-image hover-zoom ${notDone ? "d-flex" : "d-none"}`}
+            style={{ maxWidth: "10rem", height: notDone ? "14rem" : "0" }}
+            onMouseDown={() => (notDone ? image() : "")}
         >
-            <img src={isFlip ? cardback : cardfront} className="w-100" style={{ height: notDone ? "fit-content" : "0" }} />
+            <img
+                src={isFlip ? cardback : cardfront}
+                className="w-100"
+                style={{ height: notDone ? "fit-content" : "0" }}
+            />
         </div>
     );
 };

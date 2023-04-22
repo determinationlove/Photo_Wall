@@ -104,6 +104,7 @@ const MemoryGame = ({}: Props) => {
                 return arr.indexOf(item) !== index;
             });
 
+            // 如果翻開的卡片中有一樣的
             if (ans.length != 0) {
                 const matchedCardIndexes: number[] = [];
 
@@ -115,6 +116,7 @@ const MemoryGame = ({}: Props) => {
                     });
                 });
 
+                // 生成新的 VisibleCards 陣列
                 setVisibleCards((prevVisibleCards) => {
                     const newVisibleCards = [...prevVisibleCards];
                     matchedCardIndexes.forEach((index) => {
