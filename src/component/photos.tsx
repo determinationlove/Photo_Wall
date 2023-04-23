@@ -31,8 +31,8 @@ const Photos = ({}: Props) => {
     } else {
         console.log(Data);
         return (
-            <div className="container py-2 d-flex flex-nowrap w-75">
-                <div className="position-relative align-items-center justify-content-center m-2 w-1/4 col-md-3">
+            <div className="container py-2 d-flex flex-nowrap w-75 row">
+                <div className="position-relative align-items-center justify-content-center w-1/4 col">
                     {Data?.slice(0, 5).map((item: any) => {
                         return (
                             <div className="py-2 items-center justify-center">
@@ -45,7 +45,7 @@ const Photos = ({}: Props) => {
                         );
                     })}
                 </div>
-                <div className="position-relative align-items-center justify-content-center m-2 w-1/4 col-md-3">
+                <div className="position-relative align-items-center justify-content-center w-1/4 col">
                     {Data?.slice(5, 10).map((item: any) => {
                         return (
                             <div className="py-2 items-center justify-center">
@@ -58,7 +58,7 @@ const Photos = ({}: Props) => {
                         );
                     })}
                 </div>
-                <div className="position-relative align-items-center justify-content-center m-2 w-1/4 col-md-3">
+                <div className="position-relative align-items-center justify-content-center w-1/4 col">
                     {Data?.slice(10, 15).map((item: any) => {
                         return (
                             <div className="py-2 items-center justify-center">
@@ -71,7 +71,7 @@ const Photos = ({}: Props) => {
                         );
                     })}
                 </div>
-                <div className="position-relative align-items-center justify-content-center m-2 w-1/4 col-md-3">
+                <div className="position-relative align-items-center justify-content-center w-1/4 col">
                     {Data?.slice(15, 20).map((item: any) => {
                         return (
                             <div className="py-2 items-center justify-center">

@@ -13,9 +13,9 @@ export type Props = {};
 
 const Wall = ({}: Props) => {
     return (
-        <div className="container-fluid bg-body-secondary d-flex">
-            <div className="d-flex container-fluid my-3 align-items-center justify-content-center  flex-column">
-                <div className=" py-4">
+        <div className="container-fluid bg-body-secondary d-flex" style={{minHeight: "100vh"}}>
+            <div className="d-flex container-fluid my-3 align-items-center justify-content-start  flex-column">
+                <div className=" py-4 d-flex flex-column ">
                     <h1>Photo Wall</h1>
                     <Header />
                 </div>
