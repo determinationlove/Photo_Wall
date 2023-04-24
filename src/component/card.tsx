@@ -18,8 +18,9 @@ const Card = ({ img, code, onFlip, isCovered, notDone }: Props) => {
     const cardback = img;
 
     function image() {
-        if (isClickable) {
+        if (isClickable == true) {
             setIsFlip(!isFlip);
+            console.log(isClickable + "　" + code);
         }
     }
 
@@ -41,13 +42,13 @@ const Card = ({ img, code, onFlip, isCovered, notDone }: Props) => {
 
     useEffect(() => {
         if (notDone == false) {
-            console.log("被配對了");
+            //console.log("被配對了");
         }
     }, [notDone]);
 
     return (
         <div
-            className={`card align-items-center justify-content-center col m-2 shadow-sm
+            className={`card align-items-center justify-content-center col m-2 shadow-sm overflow-hidden
                         bg-image hover-zoom ${notDone ? "d-flex" : "d-none"}`}
             style={{ maxWidth: "10rem", height: notDone ? "14rem" : "0" }}
             onMouseDown={() => (notDone ? image() : "")}

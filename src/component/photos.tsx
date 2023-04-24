@@ -32,7 +32,7 @@ const Photos = ({}: Props) => {
         console.log(Data);
         return (
             <div className="container py-2 d-flex flex-nowrap w-75 row">
-                <div className="position-relative align-items-center justify-content-center w-1/4 col">
+                <div className="position-relative align-items-center justify-content-center w-1/4 col" >
                     {Data?.slice(0, 5).map((item: any) => {
                         return (
                             <div className="py-2 items-center justify-center">
@@ -45,7 +45,7 @@ const Photos = ({}: Props) => {
                         );
                     })}
                 </div>
-                <div className="position-relative align-items-center justify-content-center w-1/4 col">
+                <div className="position-relative align-items-center justify-content-center w-1/4 col" >
                     {Data?.slice(5, 10).map((item: any) => {
                         return (
                             <div className="py-2 items-center justify-center">
