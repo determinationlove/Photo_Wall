@@ -13,7 +13,8 @@ import "./index.css";
 
 import Header from "./component/header";
 import Wall from "./page/wall";
-import MemoryGame from "./page/memoryGame";
+//import MemoryGame from "./page/memoryGame";
+import MemoryGame from "./page/zustand/MemoryGame";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
