@@ -1,22 +1,27 @@
-import React from "react"
-import { useEffect, useRef, useState } from 'react';
+import React from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import useMemoryGameStore from "../../states/useMemoryGameStore";
 import Header from "../../component/header";
 import Card from "../../component/zustand/card";
 
-export type Props = {
+export type Props = {};
 
-};
-
-const MemoryGame = ({  }: Props) => {
-    const { callPic, cards, IsLoading, flippedCards, coverAllCards } = useMemoryGameStore();
+const MemoryGame = ({}: Props) => {
+    const { callPic, cards, IsLoading, flippedCards, coverAllCards } =
+        useMemoryGameStore();
     const memoryGameState = useMemoryGameStore.getState();
+
     useEffect(() => {
         memoryGameState.callPic(memoryGameState);
-      }, []);
+    }, []);
 
-      
+    useEffect(() => {
+        if (flippedCards >= 2) {
+            coverAllCards();
+        }
+    }, [flippedCards]);
+
     if (IsLoading) {
         return (
             <div className="d-flex flex-column container justify-content-center text-amber-800">
@@ -37,7 +42,11 @@ const MemoryGame = ({  }: Props) => {
                     <div className="row row-cols-4 ">
                         {cards.map((card, index) => (
                             <div className="col d-flex align-items-center justify-content-center">
-                                <Card id={card.code+index} img={card.img} code={card.code} />
+                                <Card
+                                    id={card.code + index}
+                                    img={card.img}
+                                    code={card.code}
+                                />
                             </div>
                         ))}
                     </div>
@@ -48,4 +57,3 @@ const MemoryGame = ({  }: Props) => {
 };
 
 export default MemoryGame;
-

@@ -3,6 +3,8 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import createCardStore from "../../states/useCardStore";
 import { useStore } from "zustand";
 import "../../style/custom.css";
+import useMemoryGameStore from "../../states/useMemoryGameStore";
+
 
 export type Props = {
     id: string;
@@ -13,15 +15,31 @@ export type Props = {
 const Card = ({ id, img, code }: Props) => {
 
     const cardStore = useMemo(() => createCardStore(), []); // 創建獨立的 store
-    const { isFlip, isClickable, Done, image } = useStore(cardStore); // 使用獨立的 store
+    const { isFlip, isClickable, Done, image, resetCards } = useStore(cardStore); // 使用獨立的 store
+
+    const { flippedCards, flippedCardsPlus } = useMemoryGameStore();
 
     const cardfront = require("../../assets/logo192.png");
     const cardback = img;
 
+    useEffect(() => {
+        if (flippedCards >= 2)
+        {
+            setTimeout(() => {
+                resetCards();
+            }, 1000);
+        }
+      }, [flippedCards]);
+
     const handleClick = () => {
-        console.log("isClickable: ", isClickable);
+        console.log("flippedCards: ", flippedCards);
         console.log(img);
-        image();
+        if (flippedCards < 2)
+        {
+            image();
+            flippedCardsPlus();
+            
+        }
     };
 
     return (

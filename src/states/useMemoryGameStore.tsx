@@ -12,6 +12,7 @@ type MemoryGameState = {
     cards: any[];
     IsLoading: boolean;
     flippedCards: number;
+    flippedCardsPlus: () => void;
     coverAllCards: () => void;
 };
 
@@ -20,7 +21,7 @@ const useMemoryGameStore = create<MemoryGameState>((set, get) => {
     const fetchData = async () => {
         try {
             console.log("fetchData");
-            
+
             const res = await axios.get(
                 "https://api.thecatapi.com/v1/images/search?limit=6",
                 {
@@ -88,8 +89,14 @@ const useMemoryGameStore = create<MemoryGameState>((set, get) => {
         Data: null,
         IsLoading: true,
         flippedCards: 0,
+        flippedCardsPlus: () =>
+            set((state) => ({
+                flippedCards: state.flippedCards + 1,
+            })),
         coverAllCards: () => {
-            //useCardStore.setState({ isFlip: false });
+            set(() => ({
+                flippedCards: 0,
+            }));
         },
     };
 });
