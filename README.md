@@ -1,12 +1,13 @@
 # 貓貓照片牆 + 翻牌遊戲
 
-練習用API串接弄出很多貓，CSS 使用 Bootstrap 框架
+練習用API串接弄出很多貓，CSS 使用 Bootstrap 框架，狀態管理使用 [Zustand](Zustand-url) 套件
 
-link: https://determinationlove.github.io/Photo_Wall/
+Demo: https://determinationlove.github.io/Photo_Wall/
 
 ### Built With
 
 [![React][React.js]][React-url]
+[![Zustand.com]][Zustand-url]
 [![TypeScript][TypeScript.com]][TypeScript-url]
 [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 
@@ -31,7 +32,10 @@ link: https://determinationlove.github.io/Photo_Wall/
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
+[Zustand.com]: https://img.shields.io/badge/zustand-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB
+[Zustand-url]: https://zustand-demo.pmnd.rs/
 [Bootstrap.com]:https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com/
 [TypeScript.com]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org/
+
