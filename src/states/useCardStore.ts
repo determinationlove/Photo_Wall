@@ -7,6 +7,7 @@ type CardState = {
     isFlip: boolean;
     isClickable: boolean;
     Done: boolean;
+    DoneAdd: () => void;
     image: () => void;
     resetCards: () => void;
 };
@@ -17,12 +18,22 @@ const createCardStore = () =>
         isFlip: false,
         isClickable: true,
         Done: false,
-
+        DoneAdd: () => {
+            set((state) => {
+                if (state.isClickable == false) {
+                    return {
+                        Done: true,
+                    };
+                }
+                return state;
+            });
+            
+        },
         image: () =>
             set((state) => {
-                console.log(state.isClickable);
+                //console.log(state.isClickable);
                 if (state.isClickable == true) {
-                    console.log("翻牌");
+                    //console.log("翻牌");
 
                     return {
                         isFlip: !state.isFlip,

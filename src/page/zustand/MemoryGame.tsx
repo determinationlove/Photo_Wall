@@ -30,7 +30,7 @@ const MemoryGame = ({}: Props) => {
             </div>
         );
     } else {
-        console.log(cards);
+        //console.log(cards);
         return (
             <div className="d-flex container-fluid my-3 align-items-center justify-content-center  flex-column">
                 <div className=" py-4">

@@ -13,6 +13,8 @@ type MemoryGameState = {
     IsLoading: boolean;
     flippedCards: number;
     flippedCardsPlus: () => void;
+    flippedCardsID: string[];
+    flippedCardsIDPlus: (_id: string) => void;
     coverAllCards: () => void;
 };
 
@@ -40,51 +42,51 @@ const useMemoryGameStore = create<MemoryGameState>((set, get) => {
         cards: [],
         callPic: async (state: any) => {
             set({ IsLoading: true });
+            set({ cards: [] });
 
             await fetchData();
 
-            console.log(useMemoryGameStore.getState().cards);
+            //console.log(useMemoryGameStore.getState().cards);
             return state;
         },
 
-        getPic: (cards: any, data: any) =>
-            set((state) => {
-                let totalCard = 12;
-                let loadingImages = [];
+        getPic: async (cards: any, data: any) => {
+            let totalCard = 12;
+            let loadingImages: any = [];
 
-                // 檢查圖片是否都載入
-                const loadImage = (url: string) => {
-                    return new Promise((resolve) => {
-                        const img = new Image();
-                        img.src = url;
-                        img.onload = () => resolve(true);
-                    });
+            // 檢查圖片是否都載入
+            const loadImage = (url: string) => {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.src = url;
+                    img.onload = () => resolve(true);
+                });
+            };
+
+            // 將請求回來的卡片資料賦值，因為有每張圖片要有2張卡片，所以 push 2次
+            for (let i = 0; i < totalCard / 2; i++) {
+                const cardData = {
+                    img: data[i].url,
+                    code: data[i].id,
                 };
 
-                // 將請求回來的卡片資料賦值，因為有每張圖片要有2張卡片，所以 push 2次
-                for (let i = 0; i < totalCard / 2; i++) {
-                    const cardData = {
-                        img: data[i].url,
-                        code: data[i].id,
-                    };
+                cards.push(cardData, cardData); // 将 cardData 加入到 state.cards 中
+                loadingImages.push(loadImage(data[i].url));
+            }
+            await Promise.all(loadingImages);
 
-                    state.cards.push(cardData, cardData); // 将 cardData 加入到 state.cards 中
-                    loadingImages.push(loadImage(data[i].url));
-                }
-
-                Promise.all(loadingImages);
-                let tempCards = [...cards];
-                // 打亂陣列
-                for (let i_1 = tempCards.length; i_1; i_1--) {
-                    let j = Math.floor(Math.random() * i_1);
-                    [tempCards[i_1 - 1], tempCards[j]] = [
-                        tempCards[j],
-                        tempCards[i_1 - 1],
-                    ];
-                }
-                set({ cards: tempCards, IsLoading: false });
-                return state;
-            }),
+            // 打亂陣列
+            let tempCards = [...cards];
+            for (let i = tempCards.length; i; i--) {
+                let j = Math.floor(Math.random() * i);
+                [tempCards[i - 1], tempCards[j]] = [
+                    tempCards[j],
+                    tempCards[i - 1],
+                ];
+            }
+            console.log("打亂陣列", tempCards);
+            set({ cards: tempCards, IsLoading: false });
+        },
 
         Data: null,
         IsLoading: true,
@@ -93,9 +95,17 @@ const useMemoryGameStore = create<MemoryGameState>((set, get) => {
             set((state) => ({
                 flippedCards: state.flippedCards + 1,
             })),
+        flippedCardsID: [],
+        flippedCardsIDPlus: (_id: string, callback?: () => void) => {
+            set((state) => ({
+                flippedCardsID: [...state.flippedCardsID, _id],
+            }))
+            console.log(useMemoryGameStore.getState().flippedCardsID);
+        },
         coverAllCards: () => {
             set(() => ({
                 flippedCards: 0,
+                flippedCardsID: []
             }));
         },
     };
