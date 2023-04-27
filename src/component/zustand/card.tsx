@@ -27,7 +27,7 @@ const Card = ({ id, img, code }: Props) => {
     const cardback = img;
 
     useEffect(() => {
-        console.log(flippedCardsID);
+        //console.log(flippedCardsID);
         if (flippedCards >= 2) {
             for (let i = 0; i < flippedCardsID.length; i++)
                 if (flippedCardsID[i] != flippedCardsID[i + 1]) continue;
