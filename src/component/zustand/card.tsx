@@ -43,7 +43,7 @@ const Card = ({ id, img, code }: Props) => {
         }
     }, [flippedCardsID]);
 
-    const handleClick = (flippedCardsID: string[]) => {
+    const handleClick = () => {
         console.log("flippedCards: ", flippedCards);
         console.log(code);
         if (flippedCards < 2) {
@@ -59,7 +59,7 @@ const Card = ({ id, img, code }: Props) => {
             className={`card align-items-center justify-content-center col m-2 shadow-sm overflow-hidden
                   bg-image hover-zoom ${Done ? "d-none" : "d-flex"}`}
             style={{ maxWidth: "10rem", height: Done ? "0" : "14rem" }}
-            onMouseDown={() => (isClickable ? handleClick(flippedCardsID) : "")}
+            onMouseDown={() => (isClickable ? handleClick() : "")}
         >
             <img
                 src={isFlip ? cardback : cardfront}

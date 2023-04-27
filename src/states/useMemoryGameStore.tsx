@@ -70,7 +70,7 @@ const useMemoryGameStore = create<MemoryGameState>((set, get) => {
                     code: data[i].id,
                 };
 
-                cards.push(cardData, cardData); // 将 cardData 加入到 state.cards 中
+                cards.push(cardData, cardData);
                 loadingImages.push(loadImage(data[i].url));
             }
             await Promise.all(loadingImages);
@@ -99,13 +99,13 @@ const useMemoryGameStore = create<MemoryGameState>((set, get) => {
         flippedCardsIDPlus: (_id: string, callback?: () => void) => {
             set((state) => ({
                 flippedCardsID: [...state.flippedCardsID, _id],
-            }))
+            }));
             console.log(useMemoryGameStore.getState().flippedCardsID);
         },
         coverAllCards: () => {
             set(() => ({
                 flippedCards: 0,
-                flippedCardsID: []
+                flippedCardsID: [],
             }));
         },
     };
